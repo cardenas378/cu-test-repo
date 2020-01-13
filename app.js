@@ -7,17 +7,51 @@ GAME RULES:
 - The first player to reach 100 points on GLOBAL score wins the game
 */
 
-var globalScores, roundScore, activePlayer, dice;
+var globalScores, roundScore, activePlayer;
 
 globalScores= [0,0];
 roundScore = 0;
-activePlayer = 1;
+activePlayer = 0;
 
-dice = Math.floor(Math.random() * 6) + 1 ;
-
-document.querySelector('#current-' + activePlayer).textContent = dice;
-
-// document.querySelector('#current-' + activePlayer).innerHTML = '<em>' + dice + '</em>'
 
 document.querySelector('.dice').style.display = 'none';
 
+document.getElementById('score-0').textContent = '0';
+document.getElementById('score-1').textContent = '0';
+document.getElementById('current-0').textContent = '0';
+document.getElementById('current-1').textContent = '0';
+
+ document.querySelector('.btn-roll').addEventListener('click' , function(){
+
+    //  ** 1. need a random number **
+     var dice = Math.floor(Math.random() * 6) + 1;
+
+    //  ** 2. display result ** 
+     var diceDOM = document.querySelector('.dice');
+    diceDOM.style.display = 'block';
+    diceDOM.src = 'dice-' + dice + '.png';
+
+    // ** 3. update round score OF rolled number was not a 1 ** 
+    if( dice > 1){
+        // add score
+        roundScore += dice;
+        document.getElementById('current-' + activePlayer).textContent = roundScore; 
+    }else {
+        // next players turn (check if active player is 0, if true change activePlayer to 1, if activePlayer was 1 then the else part gets executed changing activePlayer to 0)
+
+
+        activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+        // when a player rolls a 1 the activePlayer changes and the roundScore needs to be set back to 0
+        roundScore = 0;
+    }
+ });
+
+
+
+
+
+ // dice = Math.floor(Math.random() * 6) + 1 ;
+
+// document.querySelector('#current-' + activePlayer).textContent = dice;
+
+// document.querySelector('#current-' + activePlayer).innerHTML = '<em>' + dice + '</em>'
