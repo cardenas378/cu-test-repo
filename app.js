@@ -18,8 +18,8 @@ init();
 
         if(gamePlaying){
          //  ** 1. need a random number **
-         var dice = Math.floor(Math.random() * 6) + 1 + 1 + 1;
-// added the last +1, +1 
+        
+//removed this line above:  var dice = Math.floor(Math.random() * 6) + 1
 
          //  ** 2. display result ** 
          var diceDOM = document.querySelector('.dice');
